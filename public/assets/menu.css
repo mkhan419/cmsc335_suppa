@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+  
+nav {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+  
+nav #link-list ul {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    text-align: none;
+    list-style-type: none;
+    justify-content: space-around;
+    padding: 0;
+}
+  
+nav #link-list {
+    width: 35%;
+}
+  
+nav #link-list ul li a{
+    color: rgba(155, 105, 193, 1);
+    text-decoration: none;
+    padding: 0.5rem;
+}
+  
+nav #link-list ul li a:hover {
+    color:rgba(92, 141, 108, 1);
+    cursor: pointer;
+}
+  
+body {
+    background-color: rgba(26, 11, 30, 1);
+    color: rgba(155, 105, 193, 1);
+}
+  
+#suppa {
+    font-size: 5rem;
+}
+    
+hr {
+    margin-left: 6rem;
+    margin-right: 6rem;
+    border-color: rgba(155, 105, 193, 1);
+}
+  
+#box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+div#menutop {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+div#bites {
+    flex: 1;
+}
+
+h1 {
+    text-align: center;
+}
+
+p#menus {
+    text-align: justify;
+}
+
+h2 {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+}
+
+div#latin, div#asian {
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+}
+
+

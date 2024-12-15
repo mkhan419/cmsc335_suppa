@@ -7,11 +7,12 @@ const port = process.argv[2];
 app.use(express.urlencoded({ extended: true })); 
 app.set("views", path.resolve(__dirname, "templates")); 
 app.set("view engine", "ejs"); 
+app.use('/public', express.static('public'));
  
 const uri = process.env.MONGO_CONNECTION_STRING; 
 const { MongoClient, ServerApiVersion } = require('mongodb'); 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 }); 
-const databaseAndCollection = {db: "CMSC335DB", collection:"applications"}; 
+const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 }); 
+const databaseAndCollection = {db: "cmsc335suppa", collection:"reservations"}; 
  
 let clientCollection; 
  
@@ -42,7 +43,19 @@ process.stdin.on('readable', () => {
  
 app.get("/", (request, response) => {  
     response.render("index");  
-}) 
+});
+
+app.get("/menu", (request, response) => {  
+    response.render("menu");  
+});
+
+app.get("/reservations", (request, response) => {  
+    response.render("reservations");  
+});
+
+app.get("/events", (request, response) => {  
+    response.render("events");  
+});
 
  
 app.listen(port);
