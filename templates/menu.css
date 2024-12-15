@@ -1,0 +1,34 @@
+div#menutop {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+div#bites {
+    flex: 1;
+}
+
+h1 {
+    text-align: center;
+}
+
+p#menus {
+    text-align: justify;
+}
+
+h2 {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+}
+
+div#latin, div#asian {
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+}
+
+
