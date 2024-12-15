@@ -53,6 +53,30 @@ app.get("/reservations", (request, response) => {
     response.render("reservations");  
 });
 
+app.post("/reservations", async (request, response) => {
+    try { 
+        const {name, guests, date, time, email, info} = request.body; 
+    
+        if(!name || !guests || !date || !time || !email) { 
+            return response.status(400).send("name, guests, date/time, and email are required"); 
+        } 
+    
+        const newRes = { 
+            name, 
+            guests, 
+            date,
+            time,
+            email,
+            info,
+        }; 
+    
+        await clientCollection.insertOne(newRes); 
+    } catch (err) { 
+        console.log(err); 
+        response.status(port).send("an error occurred"); 
+    }
+});
+
 app.get("/events", (request, response) => {  
     response.render("events");  
 });

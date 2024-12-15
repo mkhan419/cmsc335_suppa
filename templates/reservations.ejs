@@ -30,12 +30,14 @@
 
         <div id="res">
              <form action="/reservations" method="POST" id="form">
-                <input type="text" id="name">
-                <input type="number" id="guests">
-                <input type="date" id="date">
-                <input type="time" id="time">
-                <input type="email" id="email">
-                <input type="textarea" id="allergies">
+                <label>name: <input type="text" id="name"></label>
+                <label>number of guests: <input type="number" id="guests"></label>
+                <label>date: <input type="date" id="date">      time: <input type="time" id="time"></label>
+                <label>email: <input type="email" id="email"></label>
+                <label>allergies & additional info: <input type="textarea" id="allergies"></label>
+
+                <button type="reset">Reset</button> 
+                <button type="submit">Submit</button>
             </form>
         </div>
        
