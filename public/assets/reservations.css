@@ -57,3 +57,14 @@ hr {
     justify-content: center;
     align-items: center;
 }
+
+#res {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#form {
+    flex-direction: column;
+}
