@@ -71,10 +71,16 @@ app.post("/reservations", async (request, response) => {
         }; 
     
         await clientCollection.insertOne(newRes); 
+
+        response.redirect("/reservationsConfirm")
     } catch (err) { 
         console.log(err); 
         response.status(port).send("an error occurred"); 
     }
+});
+
+app.get("/reservationsConfirm", (request, response) => { 
+    response.render("reservationsConfirm");  
 });
 
 app.get("/events", (request, response) => {  

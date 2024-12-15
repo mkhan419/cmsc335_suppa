@@ -29,7 +29,7 @@
         <hr>
 
         <div id="res">
-             <form action="/reservations" method="POST" id="form">
+             <form action="/reservationsConfirm" method="GET" id="form">
                 <label>name: <input type="text" id="name" name="name"></label>
                 <label>number of guests: <input type="number" id="guests" name="guests"></label>
                 <label>date: <input type="date" id="date" name="date">      time: <input type="time" id="time" name="time"></label>
@@ -39,6 +39,9 @@
                 <button type="reset">Reset</button> 
                 <button type="submit">Submit</button>
             </form>
+            <div style="color: green;">
+                Successfully submitted your reservation!
+            </div>
         </div>
        
 
