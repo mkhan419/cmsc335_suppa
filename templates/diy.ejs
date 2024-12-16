@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/public/assets/reservations.css" rel="stylesheet" type="text/css">
+    <title>DIY at Home!</title>
+    <script>
+        async function showInstructions(soupId) {
+            try {
+                const response = await fetch(`/getSoupInstructions?id=${soupId}`);
+                const data = await response.json();
+
+                const instructionsDiv = document.getElementById("instructions");
+                if (data.instructions) {
+                    instructionsDiv.innerHTML = `<h3>Instructions</h3><p>${data.instructions}</p>`;
+                } else {
+                    instructionsDiv.innerHTML = `<p>No instructions available for this soup.</p>`;
+                }
+            } catch (err) {
+                console.error("Error fetching instructions:", err);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <h2 id="suppa">suppa</h2>
+        <div id="name">
+            <h3>"soup-uh"</h3>
+            <h3>soup bar</h3>
+        </div>
+    </div>
+
+    <nav id="nav">
+        <div id="link-list">
+            <ul>
+                <li><a href="/">about us</a></li>
+                <li><a href="/menu">menu</a></li>
+                <li><a href="/reservations">reservations & order</a></li>
+                <li><a href="/diy">diy</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <hr>
+
+    <div id="diy-section">
+        <h1>DIY at Home!</h1>
+        <p>Click on a soup name to view the instructions:</p>
+        <ul>
+            <% meals.forEach(meal => { %>
+                <li><a href="#" onclick="showInstructions('<%= meal.idMeal %>')"><%= meal.strMeal %></a></li>
+            <% }); %>
+        </ul>
+        <div id="instructions" style="margin-top: 20px;"></div>
+    </div>
+</body>
+</html>

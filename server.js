@@ -1,4 +1,4 @@
-import { fetchWeatherApi } from 'openmeteo';
+
 const express = require("express"); 
 const path = require("path"); 
 const app = express(); 
@@ -17,54 +17,6 @@ const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
 const databaseAndCollection = {db: "cmsc335suppa", collection:"reservations"}; 
  
 let clientCollection; 
-
-const params = {
-    latitude: 38.9897,
-    longitude: 76.9378,
-    hourly: ["temperature_2m", "precipitation_probability"],
-    temperature_unit: "fahrenheit",
-    precipitation_unit: "inch",
-    timezone: "America/New_York"
-};
-
-const url = "https://api.open-meteo.com/v1/forecast";
-const responses = await fetchWeatherApi(url, params);
-
-// Helper function to form time ranges
-const range = (start, stop, step) =>
-    Array.from({ length: Math.ceil((stop - start) / step) }, (_, i) => start + i * step);
-
-// Process first location. Add a for-loop for multiple locations or weather models
-const response = responses[0];
-
-// Attributes for timezone and location
-const utcOffsetSeconds = response.utcOffsetSeconds();
-const timezone = response.timezone();
-const timezoneAbbreviation = response.timezoneAbbreviation();
-const latitude = response.latitude();
-const longitude = response.longitude();
-
-const hourly = response.hourly();
-
-// Note: The order of weather variables in the URL query and the indices below need to match!
-const weatherData = {
-    hourly: {
-        time: range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map(
-            (t) => new Date((t + utcOffsetSeconds) * 1000)
-        ),
-        temperature2m: hourly.variables(0).valuesArray(),
-        precipitationProbability: hourly.variables(1).valuesArray(),
-    },
-};
-
-// `weatherData` now contains a simple structure with arrays for datetime and weather data
-for (let i = 0; i < weatherData.hourly.time.length; i++) {
-    console.log(
-        weatherData.hourly.time[i].toISOString(),
-        weatherData.hourly.temperature2m[i],
-        weatherData.hourly.precipitationProbability[i]
-    );
-}
 
 
 client.connect().then(() => { 
@@ -130,52 +82,48 @@ app.post("/reservations", async (request, response) => {
     }
 });
 
-app.get("/reservationsConfirm", async (request, response) => { 
-    
-const url = "https://api.open-meteo.com/v1/forecast";
-const responses = await fetchWeatherApi(url, params);
-
-// Helper function to form time ranges
-const range = (start, stop, step) =>
-    Array.from({ length: Math.ceil((stop - start) / step) }, (_, i) => start + i * step);
-
-// Process first location. Add a for-loop for multiple locations or weather models
-const response = responses[0];
-
-// Attributes for timezone and location
-const utcOffsetSeconds = response.utcOffsetSeconds();
-const timezone = response.timezone();
-const timezoneAbbreviation = response.timezoneAbbreviation();
-const latitude = response.latitude();
-const longitude = response.longitude();
-
-const hourly = response.hourly();
-
-// Note: The order of weather variables in the URL query and the indices below need to match!
-const weatherData = {
-    hourly: {
-        time: range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map(
-            (t) => new Date((t + utcOffsetSeconds) * 1000)
-        ),
-        temperature2m: hourly.variables(0).valuesArray(),
-        precipitationProbability: hourly.variables(1).valuesArray(),
-    },
-};
-
-// `weatherData` now contains a simple structure with arrays for datetime and weather data
-for (let i = 0; i < weatherData.hourly.time.length; i++) {
-    console.log(
-        weatherData.hourly.time[i].toISOString(),
-        weatherData.hourly.temperature2m[i],
-        weatherData.hourly.precipitationProbability[i]
-    );
-}
-    response.render("reservationsConfirm");  
+app.get("/reservationsConfirm", async (request, response) => {
+    response.render("reservationsConfirm");
 });
 
-app.get("/events", (request, response) => {  
-    response.render("events");  
+app.get("/diy", async (request, response) => {
+    try {
+        const apiUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=soup";
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        const meals = data.meals || [];
+
+        response.render("diy", { meals });
+    } catch (err) {
+        console.error("Error fetching soup data:", err);
+        response.status(500).send("Unable to load soups.");
+    }
 });
+app.get("/getSoupInstructions", async (request, response) => {
+    const soupId = request.query.id;
+
+    if (!soupId) {
+        return response.status(400).json({ error: "Soup ID is required" });
+    }
+
+    try {
+        const apiUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${soupId}`;
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        const meal = data.meals && data.meals[0];
+
+        if (meal) {
+            response.json({ instructions: meal.strInstructions }); // Extract strInstructions
+        } else {
+            response.json({ error: "Soup not found" });
+        }
+    } catch (err) {
+        console.error("Error fetching soup details:", err);
+        response.status(500).json({ error: "Unable to fetch soup details" });
+    }
+});
+
+
 
  
 app.listen(port);
