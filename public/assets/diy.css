@@ -59,48 +59,29 @@ hr {
     text-align: center;
 }
 
-#worldly {
-    margin-top: 3rem;
-}
-
-#menutop {
-    display: flex;
-    justify-content: center;
-    /* 
-    text-align: center;
-    align-items: center; */
-}
-
-#daily, #bites {
-    margin: 4rem;
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-#menutop h1 {
-    padding: 0;
-    margin: 0;
-}
-
-#latin, #asian, #other, #sasian{
+#diy-section {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
-}
-
-#world {
-    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    flex-direction: column;
 }
 
-#other {
-    margin-bottom: 2rem;
+#diy-section ul {
+    list-style: none;
 }
 
+#meal{
+    color: rgba(155, 105, 193, 1);
+    text-decoration: none;
+}
 
+#meal:hover {
+    color: rgba(92, 141, 108, 1);
+}
+
+#instructions {
+    margin-left: 6rem;
+    margin-right: 6rem;
+}

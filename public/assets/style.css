@@ -94,3 +94,14 @@ hr {
 #why p, #vision p, #about p {
   width: 50rem;
 }
+
+#footer {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-bottom: 2rem;
+}
+
+#footer p{
+  margin-left: 1rem;
+}

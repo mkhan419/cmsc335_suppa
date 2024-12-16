@@ -97,6 +97,7 @@ app.get("/diy", async (request, response) => {
         response.status(500).send("Unable to load soups.");
     }
 });
+
 app.get("/getSoupInstructions", async (request, response) => {
     const soupId = request.query.id;
 
@@ -121,7 +122,4 @@ app.get("/getSoupInstructions", async (request, response) => {
     }
 });
 
-
-
- 
 app.listen(port);
