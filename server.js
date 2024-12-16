@@ -80,13 +80,48 @@ app.post("/reservations", async (request, response) => {
     }
 });
 
-app.get("/reservationsConfirm", async (request, response) => { 
-    response.render("reservationsConfirm");  
+app.get("/reservationsConfirm", async (request, response) => {
+    response.render("reservationsConfirm");
 });
 
-app.get("/recipes", (request, response) => {  
-    response.render("recipes");  
+app.get("/diy", async (request, response) => {
+    try {
+        const apiUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=soup";
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        const meals = data.meals || [];
+
+        response.render("diy", { meals });
+    } catch (err) {
+        console.error("Error fetching soup data:", err);
+        response.status(500).send("Unable to load soups.");
+    }
 });
+app.get("/getSoupInstructions", async (request, response) => {
+    const soupId = request.query.id;
+
+    if (!soupId) {
+        return response.status(400).json({ error: "Soup ID is required" });
+    }
+
+    try {
+        const apiUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${soupId}`;
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        const meal = data.meals && data.meals[0];
+
+        if (meal) {
+            response.json({ instructions: meal.strInstructions }); // Extract strInstructions
+        } else {
+            response.json({ error: "Soup not found" });
+        }
+    } catch (err) {
+        console.error("Error fetching soup details:", err);
+        response.status(500).json({ error: "Unable to fetch soup details" });
+    }
+});
+
+
 
  
 app.listen(port);
