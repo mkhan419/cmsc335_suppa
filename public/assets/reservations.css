@@ -85,3 +85,14 @@ label {
 #info {
     margin-top: 3rem;
 }
+
+button {
+    color:  rgba(26, 11, 30, 1);
+    border-radius: 20%;
+    padding: 0.5rem;
+    background-color: rgba(155, 105, 193, 1);
+}
+
+#buttons {
+    flex-direction: row;
+}
