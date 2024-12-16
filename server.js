@@ -4,7 +4,6 @@ const app = express();
 require("dotenv").config({ path: path.resolve(__dirname, 'credentialsDontPost/.env') });   
 const port = process.argv[2] || 3000; 
 
- 
 app.use(express.urlencoded({ extended: true })); 
 app.set("views", path.resolve(__dirname, "templates")); 
 app.set("view engine", "ejs"); 
