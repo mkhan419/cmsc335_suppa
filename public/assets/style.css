@@ -75,5 +75,22 @@ hr {
 }
 
 #content {
+  margin-left: 10rem;
+  margin-right: 10rem;
   display: flex;
+  flex-direction: column;
+}
+
+#why, #vision, #about {
+  margin-bottom: 4rem;
+  justify-content: space-between;
+  display: flex;
+}
+
+#why h2, #vision h2, #about h2{
+  width: 30rem;
+}
+
+#why p, #vision p, #about p {
+  width: 50rem;
 }
