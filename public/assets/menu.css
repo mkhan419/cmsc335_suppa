@@ -58,38 +58,49 @@ hr {
     align-items: center;
     text-align: center;
 }
-  
-div#menutop {
+
+#worldly {
+    margin-top: 3rem;
+}
+
+#menutop {
     display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-div#bites {
-    flex: 1;
-}
-
-h1 {
+    justify-content: center;
+    /* 
     text-align: center;
+    align-items: center; */
 }
 
-p#menus {
-    text-align: justify;
-}
-
-h2 {
-    text-align: center;
-}
-
-h4 {
-    text-align: center;
-}
-
-div#latin, div#asian {
+#daily, #bites {
+    margin: 4rem;
+    margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 
-    padding: 20px;
+#menutop h1 {
+    padding: 0;
+    margin: 0;
+}
+
+#latin, #asian, #other, #sasian{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#world {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+#other {
+    margin-bottom: 2rem;
 }
 
 
