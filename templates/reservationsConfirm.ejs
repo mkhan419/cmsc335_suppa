@@ -1,49 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/public/assets/reservations.css" rel="stylesheet" type="text/css">
-        <title>Reservations & Order</title>
-    </head>
-    <body>
-        <div id="box">
-            <h2 id="suppa">suppa</h2>
-            <div id="name">
-                <h3>"soup-uh"</h3>
-                <h3>soup bar</h3>
-           </div>
-        </div>
-
-        <nav id="nav">
-            <div id="link-list">
-                <ul>
-                    <li><a href="/">about us</a></li>
-                    <li><a href="/menu">menu</a></li>
-                    <li><a href="/reservations">reservations & order</a></li>
-                    <li><a href="/events">events</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <hr>
-
-        <div id="res">
-             <form action="/reservationsConfirm" method="GET" id="form">
-                <label>name: <input type="text" id="name" name="name"></label>
-                <label>number of guests: <input type="number" id="guests" name="guests"></label>
-                <label>date: <input type="date" id="date" name="date">      time: <input type="time" id="time" name="time"></label>
-                <label>email: <input type="email" id="email" name="email"></label>
-                <label>allergies & additional info: <input type="textarea" id="allergies" name="info"></label>
-
-                <button type="reset">Reset</button> 
-                <button type="submit">Submit</button>
-            </form>
-            <div style="color: green;">
-                Successfully submitted your reservation!
-            </div>
-        </div>
-       
-
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Confirmation</title>
+</head>
+<body>
+    <h1>Reservation Confirmation</h1>
+    <p style="color: green;">Thank you for your reservation!</p>
+    <p>The temperature is <%= temperature %>°F, and there is a <%= precipitationProbability %>% chance of precipitation.</p>
+    <a href="/">Back to Home</a>
+</body>
 </html>
